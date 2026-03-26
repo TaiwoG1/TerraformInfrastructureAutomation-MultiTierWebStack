@@ -21,6 +21,7 @@ This project demonstrates the automated deployment of a highly available, secure
 ├── variables.tf           # Global variable definitions <br/>
 ├── terraform.tfvars       # Variable assignments (Subscription IDs, Credentials) <br/>
 ├── backend.tf             # Remote state configuration for sending state files to Azure Blob <br/>
+├── providers.tf           # Terraform providers (plugins) configuration <br/>
 └── modules/ <br/>
 .    ├── networking/        # VNet, Subnets, NSGs, and Associations <br/>
 .    ├── compute/           # Windows VMSS, OS Disk, and Image Gallery configs <br/>
