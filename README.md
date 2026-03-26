@@ -16,17 +16,17 @@ This project demonstrates the automated deployment of a highly available, secure
 
 
 <h2> Directory Structure </h2>
-. <br/>
+&nbsp;. <br/>
 ├── main.tf                # Root module calling all sub-modules <br/>
 ├── variables.tf           # Global variable definitions <br/>
 ├── terraform.tfvars       # Variable assignments (Subscription IDs, Credentials) <br/>
 ├── backend.tf             # Remote state configuration for sending state files to Azure Blob <br/>
 ├── providers.tf           # Terraform providers (plugins) configuration <br/>
 └── modules/ <br/>
-.    ├── networking/        # VNet, Subnets, NSGs, and Associations <br/>
-.    ├── compute/           # Windows VMSS, NIC, OS Disk, and Image References <br/>
-.    ├── load_balancer/     # Public IP, LB Rules, Probes, and NAT Pools <br/>
-.    └── database/          # MSSQL Server, Database, and VNet Rules <br/>
+&emsp;&emsp;&emsp;    ├── networking/        # VNet, Subnets, NSGs, and Associations <br/>
+&emsp;&emsp;&emsp;    ├── compute/           # Windows VMSS, NIC, OS Disk, and Image References <br/>
+&emsp;&emsp;&emsp;    ├── load_balancer/     # Public IP, LB Rules, Probes, and NAT Pools <br/>
+&emsp;&emsp;&emsp;    └── database/          # MSSQL Server, Database, and VNet Rules <br/>
 <br />
 
 
@@ -58,7 +58,7 @@ To demonstrate best practices in Terraform Infrastructure as Code (IaC), the fol
 
 <h2>Deployment Evidence: </h2>
 
-- <b2>Remote State Backend: 
+- <b2>**Remote State Backend:** <br>
 The terraform state was managed externally in an Azure Storage Container, preventing state drift and enabling team collaboration in enterprise environments.  </b2>
     <p align="center">
     <img width="1365" height="396" alt="terraform_backend_storage_tfstate_file" src="https://github.com/user-attachments/assets/7a9c9023-2635-4629-acbf-7540cf4ae906" />
@@ -75,7 +75,7 @@ The terraform state was managed externally in an Azure Storage Container, preven
 <br />
 
 
-- <b2>Infrastructure Topology: 
+- <b2>**Infrastructure Topology:** <br>
 The image shows the Resource group containing the project resources and the visualizer map showing the relationship between the networking, load balancer, compute and database components. </b2>
     <p align="center">
     <img width="1351" height="533" alt="terraform_6_all_resources" src="https://github.com/user-attachments/assets/3f87b16e-3b8c-4355-8919-05460ec388bd" />
@@ -92,7 +92,8 @@ The image shows the Resource group containing the project resources and the visu
 <br />
 
 
-- <b2> Compute: VMSS <b2/>
+- <b2> **Compute:** <br>
+VMSS <b2/>
     <p align="center">
     <img width="1351" height="708" alt="terraform_4_vmss1" src="https://github.com/user-attachments/assets/53aa23a8-ed3a-48cd-8423-c437eb36db30" />
     <br />
@@ -112,7 +113,7 @@ The image shows the Resource group containing the project resources and the visu
 <br />
 
 
-- <b2>Load Balancer:
+- <b2>**Load Balancer:** <br>
 Images of the Load balancer backend pools, Load balancing rule, vm instances health status and Load Balancer successful distribution of traffic to the VMSS backend instances via Port 8080.</b2>
     <p align="center">
     <img width="1365" height="567" alt="terraform_9_lb_backendpools" src="https://github.com/user-attachments/assets/870226b6-8eee-46ec-b67d-7e1a24d0f5ad" />
@@ -135,7 +136,8 @@ Images of the Load balancer backend pools, Load balancing rule, vm instances hea
 <br /> 
 
 
-- <b2> Database: SQL Server and Database</b2>
+- <b2> **Database:** <br>
+SQL Server and Database</b2>
     <p align="center">
     <img width="1365" height="705" alt="terraform_10_sql_database" src="https://github.com/user-attachments/assets/f57505fd-d35d-47e1-92e9-8785903fefb7" />
       <br />
@@ -174,17 +176,17 @@ Images of the Load balancer backend pools, Load balancing rule, vm instances hea
 
 <h2> Technical Challenges & Solutions</h2>
 
-Regional Capacity Constraints (SkuNotAvailable):
-Challenge: Encountered Conflict errors in Initial Deployment Region due to SKU limitations for B-Series and F-Series VMs.
+**Regional Capacity Constraints (SkuNotAvailable):** <br>
+Challenge: Encountered Conflict errors in Initial Deployment Region due to SKU limitations for B-Series and F-Series VMs.<br>
 Solution: Migrated the deployment to a secondary region location and re-architected the configuration to use Standard_D2s_v3 instances, ensuring resource availability and performance.
 
-Terraform State Inconsistency:
-Challenge: Encountered "Inconsistent Result" errors during resource creation due to API latency and provider state mismatches (azurerm v4).
+**Terraform State Inconsistency:** <br>
+Challenge: Encountered "Inconsistent Result" errors during resource creation due to API latency and provider state mismatches (azurerm v4).<br>
 Solution: Performed manual state reconciliation using "Terraform import" to correlate state and sync existing cloud resources with the local configuration without data loss.
 <br/>
 
-Server Core Post-Deployment Configuration:
-Challenge: Standard IIS deployment was not immediately reachable due to Guest OS firewall restrictions and a lack of GUI tools.
+**Server Core Post-Deployment Configuration:** <br>
+Challenge: Standard IIS deployment was not immediately reachable due to Guest OS firewall restrictions and a lack of GUI tools.<br>
 Solution: Leveraged PowerShell to remotely configure the Windows Firewall and rebind IIS to Port 8080 to align with Load Balancer health probes.
 <br/>
 
