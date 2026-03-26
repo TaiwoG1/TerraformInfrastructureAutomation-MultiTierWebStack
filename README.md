@@ -8,7 +8,7 @@ This project demonstrates the automated deployment of a highly available, secure
 
 <h2>Architecture Highlights:</h2>
 
-- <b2> Modular Design: Separated into networking, compute, database, and load_balancer modules for scalability.</b2>
+- <b2> Modular Design: Separated into networking, compute, load_balancer and database modules for scalability, reusability and maintenance purposes.</b2>
 - <b2> Remote State Management: Utilized an Azure Blob Storage backend to securely store and lock the terraform.tfstate file to ensure consistency. </b2>
 - <b2> Security: Implemented Network Security Groups (NSGs), private subnets, private access to resources and SQL Virtual Network Rules to enforce the principle of least privilege.</b2>
 - <b2> High Availability: Leveraged an Azure Load Balancer with custom Health Probes (TCP 3389) and Inbound NAT Pools for administrative access.</b2>
@@ -24,7 +24,7 @@ This project demonstrates the automated deployment of a highly available, secure
 ├── providers.tf           # Terraform providers (plugins) configuration <br/>
 └── modules/ <br/>
 .    ├── networking/        # VNet, Subnets, NSGs, and Associations <br/>
-.    ├── compute/           # Windows VMSS, OS Disk, and Image Gallery configs <br/>
+.    ├── compute/           # Windows VMSS, NIC, OS Disk, and Image References <br/>
 .    ├── load_balancer/     # Public IP, LB Rules, Probes, and NAT Pools <br/>
 .    └── database/          # MSSQL Server, Database, and VNet Rules <br/>
 <br />
@@ -59,7 +59,7 @@ To demonstrate best practices in Terraform Infrastructure as Code (IaC), the fol
 <h2>Deployment Evidence: </h2>
 
 - <b2>Remote State Backend: 
-The terraform state was managed externally in an Azure Storage Container, preventing state drift and enabling team collaboration.  </b2>
+The terraform state was managed externally in an Azure Storage Container, preventing state drift and enabling team collaboration in enterprise environments.  </b2>
     <p align="center">
     <img width="1365" height="396" alt="terraform_backend_storage_tfstate_file" src="https://github.com/user-attachments/assets/7a9c9023-2635-4629-acbf-7540cf4ae906" />
       <br />
@@ -76,7 +76,7 @@ The terraform state was managed externally in an Azure Storage Container, preven
 
 
 - <b2>Infrastructure Topology: 
-The image shows the Resource group containing the project resources and the visualizer map showing the relationship between the networking components and the compute/database tiers. </b2>
+The image shows the Resource group containing the project resources and the visualizer map showing the relationship between the networking, load balancer, compute and database components. </b2>
     <p align="center">
     <img width="1351" height="533" alt="terraform_6_all_resources" src="https://github.com/user-attachments/assets/3f87b16e-3b8c-4355-8919-05460ec388bd" />
       <br />
@@ -184,7 +184,7 @@ Solution: Performed manual state reconciliation using "Terraform import" to corr
 <br/>
 
 Server Core Post-Deployment Configuration:
-Issue: Standard IIS deployment was not immediately reachable due to Guest OS firewall restrictions and a lack of GUI tools.
+Challenge: Standard IIS deployment was not immediately reachable due to Guest OS firewall restrictions and a lack of GUI tools.
 Solution: Leveraged PowerShell to remotely configure the Windows Firewall and rebind IIS to Port 8080 to align with Load Balancer health probes.
 <br/>
 
