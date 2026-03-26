@@ -16,16 +16,16 @@ This project demonstrates the automated deployment of a highly available, secure
 
 
 <h2> Directory Structure </h2>
-.
-├── main.tf                # Root module calling all sub-modules                                                            
-├── variables.tf           # Global variable definitions
-├── terraform.tfvars       # Variable assignments (Subscription IDs, Credentials)
-├── backend.tf             # Remote state configuration for sending state files to Azure Blob
-└── modules/
-    ├── networking/        # VNet, Subnets, NSGs, and Associations
-    ├── compute/           # Windows VMSS, OS Disk, and Image Gallery configs
-    ├── load_balancer/     # Public IP, LB Rules, Probes, and NAT Pools
-    └── database/          # MSSQL Server, Database, and VNet Rules
+. <br/>
+├── main.tf                # Root module calling all sub-modules <br/>
+├── variables.tf           # Global variable definitions <br/>
+├── terraform.tfvars       # Variable assignments (Subscription IDs, Credentials) <br/>
+├── backend.tf             # Remote state configuration for sending state files to Azure Blob <br/>
+└── modules/ <br/>
+.    ├── networking/        # VNet, Subnets, NSGs, and Associations <br/>
+.    ├── compute/           # Windows VMSS, OS Disk, and Image Gallery configs <br/>
+.    ├── load_balancer/     # Public IP, LB Rules, Probes, and NAT Pools <br/>
+.    └── database/          # MSSQL Server, Database, and VNet Rules <br/>
 <br />
 
 
