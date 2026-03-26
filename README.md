@@ -9,7 +9,7 @@ This project demonstrates the automated deployment of a highly available, secure
 <h2>Architecture Highlights:</h2>
 
 - <b2> Modular Design: Separated into networking, compute, database, and load_balancer modules for scalability.</b2>
-- <b2> Remote State Management: Utilized an Azure Blob Storage backend to securely store and lock the terraform.tfstate file. </b2>
+- <b2> Remote State Management: Utilized an Azure Blob Storage backend to securely store and lock the terraform.tfstate file to ensure consistency. </b2>
 - <b2> Security: Implemented Network Security Groups (NSGs), private subnets, private access to resources and SQL Virtual Network Rules to enforce the principle of least privilege.</b2>
 - <b2> High Availability: Leveraged an Azure Load Balancer with custom Health Probes (TCP 3389) and Inbound NAT Pools for administrative access.</b2>
 </b2>
